@@ -1,0 +1,27 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding: 0;
+}
+
+.item-card img {
+  height: 220px;
+  object-fit: cover;
+}
+
+.item-card .card-title {
+  min-height: 3rem;
+}
+
+.cart-widget {
+  cursor: pointer;
+}
+
+.cart-icon {
+  font-size: 1.25rem;
+}
