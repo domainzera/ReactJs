@@ -1,0 +1,73 @@
+<h1>Lista de productos</h1>
+
+<form class="filters-form" method="GET" action="/">
+  <input type="text" name="query" placeholder="Categoría o disponibilidad" value="{{query}}" />
+  <select name="sort">
+    <option value="" {{#unless sort}}selected{{/unless}}>Sin orden</option>
+    <option value="asc" {{#if (eq sort "asc")}}selected{{/if}}>Precio ascendente</option>
+    <option value="desc" {{#if (eq sort "desc")}}selected{{/if}}>Precio descendente</option>
+  </select>
+  <input type="number" name="limit" min="1" placeholder="Cantidad por página" value="{{limit}}" />
+  <button type="submit">Filtrar</button>
+</form>
+
+{{#if payload.length}}
+  <table class="products-table">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Código</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Categoría</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each payload}}
+        <tr>
+          <td><a href="/products/{{this._id}}">{{this.title}}</a></td>
+          <td>{{this.code}}</td>
+          <td>${{this.price}}</td>
+          <td>{{this.stock}}</td>
+          <td>{{this.category}}</td>
+          <td>{{this.status}}</td>
+          <td>
+            <button
+              class="add-to-cart-btn"
+              data-cart="{{../cartId}}"
+              data-product="{{this._id}}"
+            >
+              Agregar al carrito
+            </button>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <nav class="pagination">
+    {{#if hasPrevPage}}
+      <a href="{{prevLink}}">&laquo; Anterior</a>
+    {{else}}
+      <span class="disabled">&laquo; Anterior</span>
+    {{/if}}
+
+    <span>Página {{page}} de {{totalPages}}</span>
+
+    {{#if hasNextPage}}
+      <a href="{{nextLink}}">Siguiente &raquo;</a>
+    {{else}}
+      <span class="disabled">Siguiente &raquo;</span>
+    {{/if}}
+  </nav>
+
+  <p class="cart-link">
+    Ver mi carrito: <a href="/carts/{{cartId}}">/carts/{{cartId}}</a>
+  </p>
+{{else}}
+  <p>No hay productos cargados todavía.</p>
+{{/if}}
+
+<script src="/js/addToCart.js"></script>

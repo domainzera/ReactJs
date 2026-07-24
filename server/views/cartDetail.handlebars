@@ -1,0 +1,32 @@
+<a href="/" class="back-link">&laquo; Volver al listado</a>
+
+<h1>Carrito {{cid}}</h1>
+
+{{#if notFound}}
+  <p>No se encontró el carrito solicitado.</p>
+{{else}}
+  {{#if products.length}}
+    <table class="products-table">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each products}}
+          <tr>
+            <td>{{this.product.title}}</td>
+            <td>${{this.product.price}}</td>
+            <td>{{this.quantity}}</td>
+            <td>${{multiply this.product.price this.quantity}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{else}}
+    <p>Este carrito no tiene productos todavía.</p>
+  {{/if}}
+{{/if}}

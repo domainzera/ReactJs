@@ -1,0 +1,32 @@
+<a href="/" class="back-link">&laquo; Volver al listado</a>
+
+<section class="product-detail">
+  <h1>{{product.title}}</h1>
+  <p class="product-code">Código: {{product.code}}</p>
+  <p>{{product.description}}</p>
+
+  <ul class="product-meta">
+    <li><strong>Precio:</strong> ${{product.price}}</li>
+    <li><strong>Categoría:</strong> {{product.category}}</li>
+    <li><strong>Stock:</strong> {{product.stock}}</li>
+    <li><strong>Status:</strong> {{product.status}}</li>
+  </ul>
+
+  {{#if product.thumbnails.length}}
+    <div class="thumbnails">
+      {{#each product.thumbnails}}
+        <img src="{{this}}" alt="{{../product.title}}" />
+      {{/each}}
+    </div>
+  {{/if}}
+
+  <button
+    class="add-to-cart-btn"
+    data-cart="{{cartId}}"
+    data-product="{{product._id}}"
+  >
+    Agregar al carrito
+  </button>
+</section>
+
+<script src="/js/addToCart.js"></script>
